@@ -104,7 +104,11 @@ if __name__ == '__main__':
         pitch_data: List[float] = stats["pitch"]
         pitch_mean, pitch_std = pitch_data[2], pitch_data[3]
     variance_model = Variance(config, variance_model, pitch_mean, pitch_std)
+    variance_model.eval()
+    variance_model.requires_grad_ = False
     embedder_model = Embedder(config, embedder_model, pitch_mean, pitch_std)
+    embedder_model.eval()
+    embedder_model.requires_grad_ = False
     decoder_model = Decoder(config, decoder_model, fregan_model)
     decoder_model.eval()
     decoder_model.requires_grad_ = False
